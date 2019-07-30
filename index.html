@@ -23,6 +23,26 @@
             #grid {
                 justify-content: left;
             }
+            #red, #green, #blue, #yellow, #gray {
+                border: solid black 1px;
+                height: 10px;
+                width: 10px;
+            }
+            .red {
+                background-color: red
+            }
+            .green {
+                background-color: green;
+            }
+            .blue {
+                background-color: blue;
+            }
+            .yellow {
+                background-color: yellow;
+            }
+            .gray {
+                background-color: gray; 
+            }
 
         </style>
 
@@ -31,10 +51,17 @@
         <h1>Acme Pixels</h1>
         <div id="container">
             <div id="add-remove" >
-
+                <button id="addRow" type="button">Add Row</button> 
+                <button id="remRow" type="button">Remove Row</button>
+                <button id="addCol" type="button">Add Column</button> 
+                <button id="remCol" type="button">Remove Column</button> 
             </div>
             <div id="colorSwatch">
-
+                <div id="red" class="red" ></div>
+                <div id="green" class="green" ></div>
+                <div id="blue" class="blue" ></div>
+                <div id="yellow" class="yellow" ></div>
+                <div id="gray" class="gray"></div>
             </div>
             <div id="grid">
 
@@ -43,7 +70,15 @@
 
 
         <script>
-            const grid = document.querySelector("#grid")
+            const grid = document.querySelector("#grid");
+            const colorSwatch = document.querySelector("#colorSwatch");
+            const addRow = document.querySelector("#addRow");
+            const remRow = document.querySelector("#remRow")
+            const addCol = document.querySelector("#addCol")
+            const remCol = document.querySelector("#remCol")
+            
+            let color;
+
             function nxN(n) {
                 let rowsArr = [];
                 let columnArr = [];
@@ -56,10 +91,29 @@
                 }
                 render(rowsArr)
             }
-            grid.addEventListener('click', (ev) => {
-                let cell = ev.target;
-                cell.classList.toggle("cellBG")
+
+           addRow.addEventListener('click', ev => {
+            const classOfRow = document.querySelector(".row");
+            const cellCount = classOfRow.querySelector(".cell")
+            let outerDiv = document.createElement("div");
+                    outerDiv.classList.add("row");
+                    grid.appendChild(outerDiv);
+                    console.log(classOfRow.length)
+
+
+           })
+            colorSwatch.addEventListener('click', ev => {
+                color = ev.target.className;
+                console.log(color);
             })
+
+            grid.addEventListener('click', (ev) => {
+                
+                let cell = ev.target;
+                cell.classList.toggle(color)
+                
+            })
+            
 
             function render(arr) {
                 arr.forEach((item, idx) => {
