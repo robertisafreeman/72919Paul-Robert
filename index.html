@@ -1,0 +1,98 @@
+<html>
+    <head>
+        <style>
+            .cell {
+                border: 1px solid black;
+                height: 100px;
+                width: 100px;
+                display: flex;
+
+            }
+            #grid {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .cellBG {
+                background-color: red
+            }
+            #container {
+                border: 1px solid black;
+                display:flex;
+            }
+            #grid {
+                justify-content: left;
+            }
+
+        </style>
+
+    </head>
+    <body>
+        <h1>Acme Pixels</h1>
+        <div id="container">
+            <div id="add-remove" >
+
+            </div>
+            <div id="colorSwatch">
+
+            </div>
+            <div id="grid">
+
+            </div>
+        </div>
+
+
+        <script>
+            const grid = document.querySelector("#grid")
+            function nxN(n) {
+                let rowsArr = [];
+                let columnArr = [];
+                for(let i = 0; i < n; i++){
+                    columnArr.push(i);
+                }
+                for(let i = 0; i < n; i++) {
+                    rowsArr.push(columnArr);
+                    console.log(rowsArr);
+                }
+                render(rowsArr)
+            }
+            grid.addEventListener('click', (ev) => {
+                let cell = ev.target;
+                cell.classList.toggle("cellBG")
+            })
+
+            function render(arr) {
+                arr.forEach((item, idx) => {
+                    let outerDiv = document.createElement("div")
+                    outerDiv.classList.add("row");
+                    item.forEach((_item, _idx) => {
+                        let dv = document.createElement("div");
+                        dv.classList.add("cell");
+                        outerDiv.appendChild(dv);
+                    });
+                    grid.appendChild(outerDiv);
+                });
+            }
+            nxN(4);
+
+        </script>
+
+
+    </body>
+</html>
+
+<!-- const generateHTMLGrid = arr => {
+    // your code here to generate html for a grid
+    arr.forEach((item, idx) => {
+      let outerDiv = document.createElement(‘div’)
+      outerDiv.classList.add(‘row’)
+      // console.log(outerDiv)
+      item.forEach((_item, _idx) => {
+        let dv = document.createElement(‘div’)
+        dv.setAttribute(‘style’, background-color=${_item})
+        outerDiv.appendChild(dv)
+      })
+      // document.body.innerHTML += outerDiv
+      document.body.appendChild(outerDiv)
+    })
+   } -->
